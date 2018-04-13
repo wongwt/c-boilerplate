@@ -27,58 +27,24 @@ If you have any written source codes, put them inside the `src` folder.
 
 If you have any written unit tests, put them inside the `unittest` folder, in the same level as the `src` folder.
 
-#### Creating release build
-```
-make
-```
-
-#### Creating debug build
-```
-make debug
-```
-
-#### Creating shared library
-```
-make shlib
-```
-
-#### Creating Googletest binary
-```
-make gtest
-```
+| Command      | Description                                    |
+|--------------|------------------------------------------------|
+| `make`       | Create release build                           |
+| `make debug` | Create debug build                             |
+| `make gtest` | Create Googletest binary                       |
+| `make shlib` | Creare shared library                          |
 
 ### Utilities
 Some utility commands are shipped with the generic makefile.
 
-#### Clean-up intermediate files and binary
-```
-make clean
-```
-
-#### Call static code analyzer to check your source code (via [cppcheck](http://cppcheck.sourceforge.net))
-```
-make cppcheck
-```
-
-#### Call linter to lint your source code (via [cpplint](https://github.com/cpplint/cpplint))
-```
-make cpplint
-```
-
-#### Execute the binary
-```
-make run
-```
-
-#### Beautify your source code (via [astyle](http://astyle.sourceforge.net))
-```
-make style
-```
-
-#### Call dynamic code analyzer to check your binary (via [valgrind](http://valgrind.org))
-```
-make valgrind
-```
+| Command         | Description                                                                                           |
+|-----------------|-------------------------------------------------------------------------------------------------------|
+| `make clean`    | Clean-up intermediate files and binary                                                                |
+| `make cppcheck` | Call static code analyzer to check your source code (via [cppcheck](http://cppcheck.sourceforge.net)) |
+| `make cpplint`  | Call linter to lint your source code (via [cpplint](https://github.com/cpplint/cpplint))              |
+| `make run`      | Execute the binary                                                                                    |
+| `make style`    | Beautify your source code (via [astyle](http://astyle.sourceforge.net))                               |
+| `make valgrind` | Call dynamic code analyzer to check your binary (via [valgrind](http://valgrind.org))                 |
 
 ### License
 This boilerplate is distributed with MIT License.
