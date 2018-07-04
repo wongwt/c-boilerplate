@@ -40,7 +40,7 @@ gtest: $$(OBJECTS)
 
 shlib: CFLAGS     += -fPIC
 shlib: $(OBJECTS)
-	$(CC) $(LDFLAGS) $(LDLIBS) -shared $(OBJECST) -o lib$(BINARY).so
+	$(CC) $(LDFLAGS) $(LDLIBS) -shared $(OBJECTS) -o lib$(BINARY).so
 
 -include $(DEPENDS)
 
