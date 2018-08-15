@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Mac index files
+.DS_Store
+
+# Doxygen generated files
+*.db
+html/
