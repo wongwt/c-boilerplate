@@ -8,15 +8,16 @@ Specifically, this boilerplate would be a good starting point if you wish to sta
 
 ### Compiler Settings
 
-| Variable   | Description                                    | Default       |
-|------------|------------------------------------------------|---------------|
-| `BINARY`   | Name of the binary you wish to output          | `app`         |
-| `CROSS`    | Cross-compiler prefix                          |               |
-| `CC`       | GNU compiler command                           | `$(CROSS)gcc` |
-| `STD`      | GCC compile standard option                    | `-std=gnu99`  |
-| `CPPFLAGS` | Common flags for C preprocessor (`-I` options) | `-I.`         |
-| `LDFLAGS`  | Common library locations (`-L` options)        |               |
-| `LDLIBS`   | Common libraries to be loaded (`-l` options)   |               |
+| Variable   | Description                                    | Default                     |
+|------------|------------------------------------------------|-----------------------------|
+| `PROJECT`  | Project and binary name you wish to output     | `app`                       |
+| `CROSS`    | Cross-compiler prefix                          |                             |
+| `CC`       | GNU compiler command                           | `$(CROSS)gcc`               |
+| `STD`      | GCC compile standard option                    | `-std=gnu99`                |
+| `CPPFLAGS` | Common flags for C preprocessor (`-I` options) | `-I.`                       |
+| `LDFLAGS`  | Common library locations (`-L` options)        | `-L.`                       |
+| `LDLIBS`   | Common libraries to be loaded (`-l` options)   |                             |
+| `EXCLUDE`  | Directory to exclude in source searching       | `-path ./example -prune -o` |
 
 Many of the options are actually GNU make implicit variables. We just overwrite or extend the default values, so that you can easily integrate the makefile to your building environment.
 
@@ -25,24 +26,29 @@ You can also use target-specific variable values to update the compiler setting 
 ### Compile your codes
 If you have any written source codes, put them inside the `src` folder.
 
-If you have any written unit tests, put them inside the `unittest` folder, in the same level as the `src` folder.
+If you have any written unit tests, put them inside the `unittest` folder, under the `src` folder.
 
 | Command      | Description                                    |
 |--------------|------------------------------------------------|
 | `make`       | Create release build                           |
 | `make debug` | Create debug build                             |
-| `make gtest` | Create Googletest binary                       |
-| `make shlib` | Creare shared library                          |
+| `make lib`   | Creare shared library                          |
+| `make test`  | Create Googletest binary                       |
 
 ### Utilities
 Some utility commands are shipped with the generic makefile.
 
+#### Handling compiled binary
 | Command         | Description                                                                                           |
 |-----------------|-------------------------------------------------------------------------------------------------------|
 | `make clean`    | Clean-up intermediate files and binary                                                                |
+| `make run`      | Execute the binary                                                                                    |
+
+#### Source code analyze
+| Command         | Description                                                                                           |
+|-----------------|-------------------------------------------------------------------------------------------------------|
 | `make cppcheck` | Call static code analyzer to check your source code (via [cppcheck](http://cppcheck.sourceforge.net)) |
 | `make cpplint`  | Call linter to lint your source code (via [cpplint](https://github.com/cpplint/cpplint))              |
-| `make run`      | Execute the binary                                                                                    |
 | `make style`    | Beautify your source code (via [astyle](http://astyle.sourceforge.net))                               |
 | `make valgrind` | Call dynamic code analyzer to check your binary (via [valgrind](http://valgrind.org))                 |
 
