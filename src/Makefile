@@ -1,6 +1,12 @@
 PROJECT           := app
 LIBRARY           := lib$(PROJECT).so
 
+DESTDIR           ?=
+PREFIX            := /usr
+BIN_DIR           := $(DESTDIR)$(PREFIX)/bin
+HDR_DIR           := $(DESTDIR)$(PREFIX)/include/$(PROJECT)
+LIB_DIR           := $(DESTDIR)$(PREFIX)/lib
+
 ## -- Compiler Settings
 CROSS             ?=
 CC                := $(CROSS)gcc
@@ -12,7 +18,7 @@ override CFLAGS   += -D_GNU_SOURCE
 override LDFLAGS  += -L.
 override LDLIBS   +=
 
-EXCLUDE           := -path ./example -prune -o
+# EXCLUDE           := -path ./example -prune -o
 SOURCES           := $(shell find . $(EXCLUDE) -name "*.c" -print)
 OBJECTS            = $(addsuffix .o,$(basename $(SOURCES)))
 DEPENDS            = $(addsuffix .d,$(basename $(OBJECTS)))
@@ -49,15 +55,36 @@ test: $$(OBJECTS)
 -include $(DEPENDS)
 
 
-.PHONY: clean run
+.PHONY: clean distclean install run uninstall
 .ONESHELL:
 
 clean:
 	@find . -type f -executable | xargs $(RM)
 	@find . -name "*.[ado]" | xargs $(RM)
 
+distclean: uninstall clean
+
+install: uninstall
+ifneq ("$(wildcard $(PROJECT))","")
+	@cp $(PROJECT) $(BIN_DIR)
+else ifneq ("$(wildcard $(LIBRARY))","")
+	@mkdir -p $(HDR_DIR)
+	@find . -type f -name "*.h" | xargs -I {} cp --parents {} $(HDR_DIR)
+	@cp $(LIBRARY) $(LIB_DIR)
+endif
+
 run:
-	@find . -type f -executable ! -name "*.so" | xargs sh -c
+ifneq ("$(wildcard $(PROJECT))","")
+	@./$(PROJECT)
+endif
+
+uninstall:
+ifneq ("$(wildcard $(PROJECT))","")
+	@$(RM) -rf $(BIN_DIR)/$(PROJECT)
+else ifneq ("$(wildcard $(LIBRARY))","")
+	@$(RM) -rf $(HDR_DIR)
+	@$(RM) -rf $(LIB_DIR)/$(LIBRARY)
+endif
 
 
 .PHONY: cppcheck cpplint style valgrind
