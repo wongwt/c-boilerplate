@@ -10,14 +10,16 @@ Specifically, this boilerplate would be a good starting point if you wish to sta
 
 | Variable   | Description                                    | Default                     |
 |------------|------------------------------------------------|-----------------------------|
-| `PROJECT`  | Project and binary name you wish to output     | `app`                       |
+| `PROJECT`  | Project name                                   | `app`                       |
+| `DESTDIR`  | Destination directory                          |                             |
+| `PREFIX`   | Installation directory prefix                  | `/usr`                      |
 | `CROSS`    | Cross-compiler prefix                          |                             |
 | `CC`       | GNU compiler command                           | `$(CROSS)gcc`               |
 | `STD`      | GCC compile standard option                    | `-std=gnu99`                |
 | `CPPFLAGS` | Common flags for C preprocessor (`-I` options) | `-I.`                       |
 | `LDFLAGS`  | Common library locations (`-L` options)        | `-L.`                       |
 | `LDLIBS`   | Common libraries to be loaded (`-l` options)   |                             |
-| `EXCLUDE`  | Directory to exclude in source searching       | `-path ./example -prune -o` |
+| `EXCLUDE`  | Directory to exclude in source searching       |                             |
 
 Many of the options are actually GNU make implicit variables. We just overwrite or extend the default values, so that you can easily integrate the makefile to your building environment.
 
@@ -42,7 +44,10 @@ Some utility commands are shipped with the generic makefile.
 | Command         | Description                                                                                           |
 |-----------------|-------------------------------------------------------------------------------------------------------|
 | `make clean`    | Clean-up intermediate files and binary                                                                |
+| `make distclean`| Remove project binary/library from specified location and clean-up intermediate files and binary      |
+| `make install`  | Install project binary/library to specified location                                                  |
 | `make run`      | Execute the binary                                                                                    |
+| `make uninstall`| Remove project binary/library from specified location                                                 |
 
 #### Source code analyze
 | Command         | Description                                                                                           |
